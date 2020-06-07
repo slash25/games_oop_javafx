@@ -2,6 +2,7 @@ package ru.job4j;
 
 import org.junit.Test;
 import ru.job4j.chess.firuges.Cell;
+import ru.job4j.chess.firuges.Figure;
 import ru.job4j.chess.firuges.black.BishopBlack;
 
 import java.util.ArrayList;
@@ -19,22 +20,22 @@ public class BishopBlackTest {
 
     @Test
     public void testCopy() {
-        BishopBlack bishop = new BishopBlack(Cell.G1);
-        assertThat(bishop.copy(Cell.G1), is(Cell.G1));
+        BishopBlack bishop = new BishopBlack(Cell.C1);
+        assertThat(bishop.copy(bishop.position()), is(bishop.position()));
     }
 
     @Test
     public void testWay() {
 
         BishopBlack bishopMov = new BishopBlack(Cell.C1);
-        ArrayList<Cell> moving  = new ArrayList<>();
-
-        moving.add(Cell.D2);
-        moving.add(Cell.E3);
-        moving.add(Cell.F4);
-        moving.add(Cell.G5);
-        assertThat(bishopMov.way(Cell.C1, Cell.G5),is(moving));
-
+        Cell[] moving  = {Cell.C1, Cell.D2, Cell.E3, Cell.F4, Cell.G5 };
+        assertThat(bishopMov.way(Cell.C1, Cell.G5), is(moving));
     }
 
+    @Test
+    public void testWayDownRight() {
+        BishopBlack bishopMov = new BishopBlack(Cell.C1);
+        Cell[] moving  = {Cell.D4, Cell.E3, Cell.F2, Cell.G1 };
+        assertThat(bishopMov.way(Cell.D4, Cell.G1), is(moving));
+    }
 }
