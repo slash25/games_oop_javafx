@@ -3,6 +3,8 @@ package ru.job4j.chess.firuges.black;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
+import java.util.Objects;
+
 /**
  * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$
@@ -32,9 +34,9 @@ public class BishopBlack implements Figure {
         //написать метод проверки в какую сторону диагональ
         int size = Math.abs(dest.x - source.x) + 1;
         Cell[] steps = new Cell[size];
-       int[] delts = findDirection(source, dest);
-        int dx = delts[0];
-        int dy = delts[1];
+        int dx = (dest.x - source.x) / Math.abs(dest.x - source.x);
+        int dy = (dest.y - source.y) / Math.abs(dest.y - source.y);
+
         int  newDX = 0;
         int newDY = 0;
 
@@ -46,35 +48,6 @@ public class BishopBlack implements Figure {
         }
         return steps;
     }
-
-
-    private int[] findDirection(Cell source, Cell dest) {
-        int xDir = dest.x - source.x;
-        int yDir = dest.y - source.y;
-
-        //Upp right
-        if ((xDir > 0) && (yDir > 0)) {
-            int[] xd = {1,1} ;
-            return xd ;
-        }
-
-        //Down right
-        if ((xDir > 0) && (yDir < 0)) {
-            int[] xd = {1,-1} ;
-            return xd ;
-        }
-
-        //Up left
-        if ((xDir < 0) && (yDir < 0)) {
-            int[] xd = {-1,1} ;
-            return xd ;
-        }
-        //Up down
-        int[] xd = {-1,-1};
-        return xd;//Down left
-    }
-
-
 
     //метод проверки диагонали
     private boolean isDiagonal(Cell source, Cell dest) {
@@ -91,5 +64,18 @@ public class BishopBlack implements Figure {
         return "BishopBlack{" +
                 "position=" + position +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BishopBlack)) return false;
+        BishopBlack that = (BishopBlack) o;
+        return position == that.position;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position);
     }
 }
