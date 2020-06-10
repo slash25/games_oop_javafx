@@ -15,7 +15,6 @@ public class BishopBlackTest {
     public void testPosition() {
         BishopBlack bishop = new BishopBlack(Cell.B1);
             assertThat(bishop.position(),is(Cell.B1));
-
     }
 
     @Test
@@ -25,7 +24,7 @@ public class BishopBlackTest {
     }
 
     @Test
-    public void testWay() {
+    public void testWayDiag() {
 
         BishopBlack bishopMov = new BishopBlack(Cell.C1);
         Cell[] moving  = {Cell.C1, Cell.D2, Cell.E3, Cell.F4, Cell.G5 };
@@ -33,9 +32,16 @@ public class BishopBlackTest {
     }
 
     @Test
-    public void testWayDownRight() {
+    public void testWayDownRightDiag() {
         BishopBlack bishopMov = new BishopBlack(Cell.C1);
         Cell[] moving  = {Cell.D4, Cell.E3, Cell.F2, Cell.G1 };
         assertThat(bishopMov.way(Cell.D4, Cell.G1), is(moving));
+    }
+
+    @Test
+    public void testWayDownRight() {
+        BishopBlack bishopMov = new BishopBlack(Cell.C1);
+        Cell[] moving  = {Cell.D4, Cell.D3, Cell.D2, Cell.D1};
+        assertThat(bishopMov.way(Cell.D4, Cell.D1), is(moving));
     }
 }

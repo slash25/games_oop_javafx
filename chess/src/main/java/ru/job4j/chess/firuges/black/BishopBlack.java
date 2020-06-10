@@ -32,81 +32,49 @@ public class BishopBlack implements Figure {
         //написать метод проверки в какую сторону диагональ
         int size = Math.abs(dest.x - source.x) + 1;
         Cell[] steps = new Cell[size];
-        switch (findDirection(source, dest)) {
+       int[] delts = findDirection(source, dest);
+        int dx = delts[0];
+        int dy = delts[1];
+        int  newDX = 0;
+        int newDY = 0;
 
-            //Вверх влево
-            case 1:
-                int deltaXupLeft = 0;
-                int deltaYupLeft = 0;
-               // steps[0] = Cell.findBy(source.x, source.y);
+        for (int index = 0; index < size; index++){
 
-                for (int index = 0; index < size; index++) {
-                    steps[index] = Cell.findBy(source.x + deltaXupLeft, source.y + deltaYupLeft);
-                deltaXupLeft--;
-                deltaYupLeft++;
-                }
-                break;
-
-
-            //Вниз влево
-            case 2:
-                int deltaXdownLeft = 0;
-                int deltaYdownLeft = 0;
-
-                for (int index = 0; index < size; index++) {
-                    steps[index] = Cell.findBy(source.x + deltaXdownLeft, source.y + deltaYdownLeft);
-                    deltaXdownLeft--;
-                    deltaYdownLeft--;
-                }
-                break;
-
-            //Вверх вправо
-            case 3:
-                int deltaXupRight = 0;
-                int deltaYupRight = 0;
-
-                for (int index = 0; index < size; index++) {
-                    steps[index] = Cell.findBy(source.x + deltaXupRight, source.y + deltaYupRight);
-                    deltaXupRight++;
-                    deltaYupRight++;
-                }
-                break;
-
-            //Вниз вправо
-            case 4:
-                int deltaXdownRight = 0;
-                int deltaYdownRight = 0;
-
-                for (int index = 0; index < size; index++) {
-                    steps[index] = Cell.findBy(source.x + deltaXdownRight, source.y + deltaYdownRight);
-                    deltaXdownRight++;
-                    deltaYdownRight--;
-                }
-                break;
+            steps[index] = Cell.findBy( source.x + newDX , source.y + newDY);
+            newDX = newDX + dx;
+            newDY  = newDY + dy;
         }
         return steps;
     }
 
-    private int findDirection(Cell source, Cell dest) {
+
+    private int[] findDirection(Cell source, Cell dest) {
         int xDir = dest.x - source.x;
         int yDir = dest.y - source.y;
 
         //Upp right
         if ((xDir > 0) && (yDir > 0)) {
-            return 3;
+            int[] xd = {1,1} ;
+            return xd ;
         }
 
         //Down right
         if ((xDir > 0) && (yDir < 0)) {
-            return 4;
+            int[] xd = {1,-1} ;
+            return xd ;
         }
 
         //Up left
         if ((xDir < 0) && (yDir < 0)) {
-            return 1;
+            int[] xd = {-1,1} ;
+            return xd ;
         }
-        return 2;//Down left
+        //Up down
+        int[] xd = {-1,-1};
+        return xd;//Down left
     }
+
+
 
     //метод проверки диагонали
     private boolean isDiagonal(Cell source, Cell dest) {
