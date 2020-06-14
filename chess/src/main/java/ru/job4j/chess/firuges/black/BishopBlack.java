@@ -49,6 +49,9 @@ public class BishopBlack implements Figure {
         return steps;
     }
 
+
+
+
     //метод проверки диагонали
     private boolean isDiagonal(Cell source, Cell dest) {
         return Math.abs(dest.x - source.x) == Math.abs(dest.y - source.y);
