@@ -88,15 +88,15 @@ public class Logic {
 
     }
 
-
+//метод проверки отсутствия других фигур на пути нашей фигуры
     private boolean testWay(Cell[] steps){
         boolean value = false;
-        for (Cell cl : steps
-        ) {
-            if (findBy(cl) != -1) {
+        for (int index = 1;  index < steps.length; index++) {
+            if (findBy(steps[index]) == -1) {
                 value = true;
             }
-
+            else value = false;
+            break;
         }
         return value;
     }
@@ -111,6 +111,9 @@ public class Logic {
 
     private int findBy(Cell cell) {
         int rst = -1;
+        //если какая то фигура с индексом находится на пути нашего слона то возвращаем
+        //индекс мешающей фигуры
+        //иначе возвращаем -1
         for (int index = 0; index != this.figures.length; index++) {
             if (this.figures[index] != null && this.figures[index].position().equals(cell)) {
                 rst = index;

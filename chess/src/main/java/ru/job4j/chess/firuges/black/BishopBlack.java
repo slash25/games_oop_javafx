@@ -31,7 +31,7 @@ public class BishopBlack implements Figure {
             );
         }
 
-        //написать метод проверки в какую сторону диагональ
+        // Метод проверки в какую сторону диагональ
         int size = Math.abs(dest.x - source.x) + 1;
         Cell[] steps = new Cell[size];
         int dx = (dest.x - source.x) / Math.abs(dest.x - source.x);
@@ -43,8 +43,8 @@ public class BishopBlack implements Figure {
         for (int index = 0; index < size; index++){
 
             steps[index] = Cell.findBy( source.x + newDX , source.y + newDY);
-            newDX = newDX + dx;
-            newDY  = newDY + dy;
+            newDX = newDX + dx;//тут делаем приращение ходов по Х
+            newDY  = newDY + dy;// тут делаем приращение ходов по У
         }
         return steps;
     }

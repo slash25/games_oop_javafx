@@ -49,6 +49,6 @@ public class LogicTest {
         bishopTestWay.add(pawnBlack7);
         bishopTestWay.add(pawnBlack8);
 
-        assertThat(bishopTestWay.move(Cell.C1, Cell.G5), is(true));
+        assertThat(bishopTestWay.move(Cell.C1, Cell.G5), is(false));
     }
 }
