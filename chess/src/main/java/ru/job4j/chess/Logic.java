@@ -61,6 +61,8 @@ public class Logic {
                 Это нужно сделать через метод way объекта Figure.
                  */
                 Cell[] steps = this.figures[index].way(source, dest);
+
+                if (testWay(steps)) {
                 /*
                 Дальше нужно проверить, что массив клеток от метода way не заполнен
                  другими объектами класса Figure. Если он не заполнен, но нужно
@@ -70,15 +72,33 @@ public class Logic {
                 То есть мы нашли объект и заменили его ячейку новым объектом
                  */
 
-                if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                    rst = true;
-                    this.figures[index] = this.figures[index].copy(dest);
+                    if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+                        rst = true;
+                        this.figures[index] = this.figures[index].copy(dest);
+                    }
+
                 }
+
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return rst;
+             catch(Exception e){
+                    e.printStackTrace();
+                }
+            return rst;
+
+    }
+
+
+    private boolean testWay(Cell[] steps){
+        boolean value = false;
+        for (Cell cl : steps
+        ) {
+            if (findBy(cl) != -1) {
+                value = true;
+            }
+
+        }
+        return value;
     }
 
 
