@@ -62,21 +62,20 @@ public class Logic {
                  */
                 Cell[] steps = this.figures[index].way(source, dest);
 
-                if (testWay(steps)) {
+
                 /*
                 Дальше нужно проверить, что массив клеток от метода way не заполнен
                  другими объектами класса Figure. Если он не заполнен, но нужно
                   в массив figures в позицию, полученную в пункте 1, записать
-                  новый объект, полученный из метода figure.copy.
+                  новый объект, полученный из метода figure.copy.*/
+                 if (testWay(steps)) {
+                //То есть мы нашли объект и заменили его ячейку новым объектом
 
-                То есть мы нашли объект и заменили его ячейку новым объектом
-                 */
 
                     if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
                         rst = true;
                         this.figures[index] = this.figures[index].copy(dest);
                     }
-
                 }
 
             }
@@ -91,12 +90,12 @@ public class Logic {
 //метод проверки отсутствия других фигур на пути нашей фигуры
     private boolean testWay(Cell[] steps){
         boolean value = false;
-        for (int index = 1;  index < steps.length; index++) {
-            if (findBy(steps[index]) == -1) {
+        for (Cell cl : steps) {
+
+            if (findBy(cl) == -1) {
                 value = true;
+                break;
             }
-            else value = false;
-            break;
         }
         return value;
     }
